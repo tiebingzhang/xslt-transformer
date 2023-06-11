@@ -65,9 +65,8 @@
         <div class="grid-item">
             <div id="result-editor" class="editor"></div>
             <input type="button" id="format-output" value="format" onclick="resultEditor.setValue(vkbeautify.xml(resultEditor.getValue()),-1)"/>
-            <input type="button" id="save-result" onclick="var blob = new Blob([resultEditor.session.getValue()], {
-			type: 'text/html' }); this.download = document.getElementById('results').value; this.href =
-			window.URL.createObjectURL(blob);" value="save" />
+            <a id="save-result" onclick="var blob = new Blob([resultEditor.session.getValue()], { type: 'text/xml' });
+				this.download = 'result.xml'; this.href = window.URL.createObjectURL(blob);"> save </a>
         </div>
     </section>
 

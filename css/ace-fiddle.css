@@ -83,17 +83,21 @@ label {
 	font: 0.9em "Fira Sans", sans-serif;
 }
 
-/*
 #save-result {
     display: inline-block;
-    border-width: 2px;
+	background-color:#dddddd;
+    border-width: 1px;
     border-style: outset;
     border-color: rgb(118,118,118);
-    padding: 2px;
-    color: black;
+	border-radius: 4px;
+    padding: 0px 6px 0px 6px;
+    color: #222222;
     text-decoration: none;
+	cursor:default;
 }
-*/
+#save-result:hover {
+	background-color:#aaaaaa;
+}
 
 #load-input-file, #load-xslt-file {
     display: none;
