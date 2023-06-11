@@ -44,6 +44,4 @@ function load(location) {
 }
 
 load(document.location);
-
-
-
+resultEditor.session.setMode('ace/mode/xml');

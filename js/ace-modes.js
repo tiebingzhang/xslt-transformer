@@ -17,9 +17,18 @@ var filetypes = {
 };
 
 function setDocument(editor, content, mode) {
+	console.log("setting editor to mode", mode);
+	new Error().stack.toString();
     if (mode && modes[mode]) {
       editor.session.setMode(modes[mode]);
       editor.session.setUseWrapMode(mode === 'text');
     }
+	/*
+	if (mode==="xml"){
+		content=vkbeautify.xml(content);
+	}else if (mode==="json"){
+		content=vkbeautify.json(content);
+	}
+	*/
     editor.session.setValue(content);
 }

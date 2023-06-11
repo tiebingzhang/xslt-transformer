@@ -66,11 +66,24 @@ html, body {
 #load-input, #load-xslt, #save-result {
     position: absolute;
     right: 9px;
-    bottom: 9px;
-    opacity: 0.3;
+    bottom: 3px;
+    opacity: 0.8;
     z-index: 100;
 }
 
+#format-input, #format-template, #format-output {
+    position: absolute;
+    right: 59px;
+    bottom: 3px;
+    opacity: 0.8;
+    z-index: 100;
+}
+
+label {
+	font: 0.9em "Fira Sans", sans-serif;
+}
+
+/*
 #save-result {
     display: inline-block;
     border-width: 2px;
@@ -80,6 +93,7 @@ html, body {
     color: black;
     text-decoration: none;
 }
+*/
 
 #load-input-file, #load-xslt-file {
     display: none;

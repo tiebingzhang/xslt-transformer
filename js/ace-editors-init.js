@@ -27,3 +27,5 @@ resultEditor.session.setMode('ace/mode/xml');
 
 resultEditor.session.setTabSize(2);
 resultEditor.session.setUseSoftTabs(true);
+
+inputEditor.focus();

@@ -54,19 +54,16 @@ function transform(input, xslt, inputType, resultsSelect) {
     responseData = { ResultType: 'transformation', ResultDocuments: [] };
 
     if ("output" in transformationResult) {
-      responseData.ResultDocuments.push({ uri: 'principal result', content: transformationResult.output, method: 'html' });
+      responseData.ResultDocuments.push({ uri: 'principal result', content: transformationResult.output, method: 'xml' });
     }
 
     for (let resultDocUri in transformationResult) {
       if (resultDocUri !== 'output') {
         let suffix = resultDocUri.replace(/.*(\.[a-z]+)/gi, '$1').toLowerCase();
         let method = filetypes[suffix];
-        responseData.ResultDocuments.push({ uri: resultDocUri, content: transformationResult[resultDocUri], method: method ? method : 'html' });
+        responseData.ResultDocuments.push({ uri: resultDocUri, content: transformationResult[resultDocUri], method: method ? method : 'xml' });
       }
     }
-
-
-
   }
   catch (e) {
     resultsSelect.length = 0;
@@ -87,17 +84,13 @@ e.stack`,
     responseData.ResultDocuments.forEach((result, index) => {
       resultsSelect.appendChild(new Option(result.uri, result.uri));
       if (index === 0) {
-        writeResult(window.frames['current-result-frame'], result.content);
+        //writeResult(window.frames['current-result-frame'], result.content);
       }
     });
 
     resultsSelect.onchange = function (evt) {
       var selectedResult = responseData.ResultDocuments[this.selectedIndex];
       setDocument(resultEditor, selectedResult.content, selectedResult.method);
-
-      if (document.getElementById('render-box').checked) {
-        writeResult(window.frames['current-result-frame'], responseData.ResultDocuments[this.selectedIndex].content);
-      }
     };
 
     setDocument(resultEditor, responseData.ResultDocuments[0].content, responseData.ResultDocuments[0].method);

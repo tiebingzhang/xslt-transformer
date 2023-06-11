@@ -7,13 +7,13 @@
 
   <link rel="stylesheet" href="css/ace-fiddle.css">
 
-  <script src="/Saxon-JS-2.5/SaxonJS2.js"></script>
+  <script src="Saxon-JS-2.5/SaxonJS2.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.22.0/ace.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.22.0/ext-language_tools.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.22.0/mode-xml.js"></script>
-  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.22.0/mode-html.js"></script>-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.22.0/mode-json.js"></script>
+  <script src="js/vkbeautify.js"></script>
 </head>
 <body class="container">
     <header >
@@ -27,7 +27,6 @@
                     <label><input type="radio" name="input-type" value="None">No input</label>
                 </fieldset>
             </form>
-            <input type="button" id="format" value="format" onclick="console.log('format clicked');">
             <input type="button" id="transform" value="transform" accesskey="t"
                    onclick="var inputType = document.getElementById('input-types').form['input-type'].value;
                             transform(inputType !== 'None' ? inputEditor.session.getValue() : null, xsltEditor.session.getValue(), inputType, document.getElementById('results'));">
@@ -41,12 +40,17 @@
             
     <section class="grid-row">
         <div id="input-col" class="grid-item">
+			<label>Source</label>
             <div id="input-editor" class="editor"></div>
             <input type="button" id="load-input" value="load" onclick="document.getElementById('load-input-file').click();">
+            <input type="button" id="format-input" value="format"
+			onclick="inputEditor.setValue(vkbeautify.xml(inputEditor.getValue()),-1)">
             <input type="file" id="load-input-file" onchange="this.files[0].text().then(t => inputEditor.session.setValue(t));" accept=".xml,.xsl,.xslt,.json,text/xml,application/xml,application/json,application/xml+xslt">
         </div>
         <div class="grid-item">
+			<label>XSLT</label>
             <div id="xslt-editor" class="editor"></div>
+            <input type="button" id="format-template" value="format" onclick="xsltEditor.setValue(vkbeautify.xml(xsltEditor.getValue()),-1)">
           <input type="button" id="load-xslt" value="load" onclick="document.getElementById('load-xslt-file').click();">
             <input type="file" id="load-xslt-file" onchange="this.files[0].text().then(t => xsltEditor.session.setValue(t));" accept=".xml,.xsl,.xslt,text/xml,application/xml,application/xml+xslt">
         </div>
@@ -60,7 +64,10 @@
     <section class="grid-row">
         <div class="grid-item">
             <div id="result-editor" class="editor"></div>
-            <a id="save-result" onclick="var blob = new Blob([resultEditor.session.getValue()], { type: 'text/html' }); this.download = document.getElementById('results').value; this.href = window.URL.createObjectURL(blob);">save</a>
+            <input type="button" id="format-output" value="format" onclick="resultEditor.setValue(vkbeautify.xml(resultEditor.getValue()),-1)"/>
+            <input type="button" id="save-result" onclick="var blob = new Blob([resultEditor.session.getValue()], {
+			type: 'text/html' }); this.download = document.getElementById('results').value; this.href =
+			window.URL.createObjectURL(blob);" value="save" />
         </div>
     </section>
 
